@@ -60,11 +60,11 @@ void getHumanMove(char playerSymbol) {
   int row;
   int col;
   do {
-    printf("Enter row (0-2): ");
+    printf("Enter row (1-3): ");
     scanf("%d", &row);
-    printf("Enter column (0-2): ");
+    printf("Enter column (1-3): ");
     scanf("%d", &col);
-  } while (!tryMove(row, col, playerSymbol));
+  } while (!tryMove(row - 1, col - 1, playerSymbol));
   printBoard();
 }
 
@@ -77,7 +77,7 @@ void getComputerMove(char playerSymbol) {
       if (board[row][col] == ' ') {
         board[row][col] = playerSymbol;
         if (win() == playerSymbol) {
-          printf("Computer chose (%d, %d)\n", row, col);
+          printf("Computer chose (%d, %d)\n", row + 1, col + 1);
           printBoard();
           return;
         }
@@ -93,7 +93,7 @@ void getComputerMove(char playerSymbol) {
         board[row][col] = opponentSymbol;
         if (win() == opponentSymbol) {
           board[row][col] = playerSymbol;
-          printf("Computer chose (%d, %d)\n", row, col);
+          printf("Computer chose (%d, %d)\n", row + 1, col + 1);
           printBoard();
           return;
         }
@@ -104,7 +104,7 @@ void getComputerMove(char playerSymbol) {
 
   if (board[1][1] == ' ') {
     board[1][1] = playerSymbol;
-    printf("Computer chose (1, 1)\n");
+    printf("Computer chose (2, 2)\n");
     printBoard();
     return;
   }
@@ -115,7 +115,7 @@ void getComputerMove(char playerSymbol) {
     col = corners[i][1];
     if (board[row][col] == ' ') {
       board[row][col] = playerSymbol;
-      printf("Computer chose (%d, %d)\n", row, col);
+      printf("Computer chose (%d, %d)\n", row + 1, col + 1);
       printBoard();
       return;
     }
@@ -127,7 +127,7 @@ void getComputerMove(char playerSymbol) {
     col = edges[i][1];
     if (board[row][col] == ' ') {
       board[row][col] = playerSymbol;
-      printf("Computer chose (%d, %d)\n", row, col);
+      printf("Computer chose (%d, %d)\n", row + 1, col + 1);
       printBoard();
       return;
     }
