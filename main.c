@@ -136,24 +136,33 @@ void getComputerMove(char playerSymbol) {
 
 int main(void) {
   printf("Welcome to TicTacToe!\n");
-  printf("Choose game mode (1 for human vs human, 2 for human vs computer): ");
+  printf("Choose game mode:\n\t1 for human vs human\n\t2 for human vs "
+         "computer\n\t3 for computer vs computer\n");
   char currentPlayer = 'X';
   int gameMode;
   scanf("%d", &gameMode);
   char humanSymbol = 'X';
-  char computerSymbol;
+  char computer1Symbol;
+  char computer2Symbol;
   int isHumanVsHuman = 1;
+  int isComputerVsComputer = 0;
   if (gameMode == 2) {
     printf("Do you want to play as X or O? ");
     scanf(" %c", &humanSymbol);
     humanSymbol = toupper(humanSymbol);
-    computerSymbol = (humanSymbol == 'X') ? 'O' : 'X';
+    computer1Symbol = (humanSymbol == 'X') ? 'O' : 'X';
     isHumanVsHuman = 0;
+  } else if (gameMode == 3) {
+    computer1Symbol = 'X';
+    computer2Symbol = 'O';
+    isHumanVsHuman = 0;
+    isComputerVsComputer = 1;
   }
   initBoard();
   printBoard();
   do {
-    if (isHumanVsHuman || currentPlayer == humanSymbol)
+    if ((isHumanVsHuman || currentPlayer == humanSymbol) &&
+        !isComputerVsComputer)
       getHumanMove(currentPlayer);
     else
       getComputerMove(currentPlayer);
